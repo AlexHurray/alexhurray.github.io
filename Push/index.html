@@ -1,0 +1,109 @@
+	<!DOCTYPE html>
+<!-- saved from url=(0077)http://10.111.76.13:8085/2013/reports/report?type=ssb&out=1&date=201610041800 -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title></title>
+    <script src="./jquery.js"></script>
+    <script src="./jquery-ui.js"></script>
+    <script type="text/javascript" src="./page_query_string.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="material-design-icons.css">
+
+    
+    
+    <link rel="stylesheet" type="text/css" href="./jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="./shCore.css">
+    <link rel="stylesheet" type="text/css" href="./demo.css">
+
+    <script type="text/javascript" language="javascript" src="./jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="./shCore.js"></script>
+    <script type="text/javascript" language="javascript" src="./demo.js"></script>
+    
+  </head>
+<script>
+
+  function sendPushVC(){
+alert($("#to_select").val()+$("#to_lang").val());
+
+    var jdata = { data: {title:"",
+                  IntLibPush: {"push_tag": "2020-04-17 dr-telemed.ru",
+ "applications":["com.wherecom.elarisafefamily"], 
+"messages":{"AutoCancel":"true",
+ "isOpenInBrowser" : "true", 
+"link":"https://elari.net/catalog/accessories/smartcare/?utm_source=safefamily&utm_medium=push&utm_campaign=smart-care", 
+"appForStart" : "com.wherecom.elarisafefamily", "action":"com.umeox.capsule.ui.launch.WelcomeActivity", "intent_action":"", 
+"extras":[{"name": "EXTRAS_FORCE_PROMO", "extra": "true"}, 
+{"name": "f2", "extra": "f2"}, 
+{"name": "f3", "extra": "f3"}],
+ titel: $( "#title_input" ).val(),
+msg: $( "#msg_input" ).val(),
+"smallIcon" : "123",
+largeIcon : $( "#url_input" ).val(),
+"priority"  : "PRIORITY_DEFAULT","defaults" : "DEFAULT_LIGHTS",
+ "targetAppVersion":"", 
+"category" : "CATEGORY_STATUS", 
+"vibrate":[10000, 1000, 1000, 1000, 1000], "style":"BigPictureStyle"}}
+                },
+				"priority" : "high", 
+  "content_available" : true,
+				//to: "/topics/elari_safe_family_test" // Отправка на все устройства с этой библиотекой и этим Firebase-ом
+to:$("#to_select").val()+$("#to_lang").val()
+
+				//to:"dNgEhLQs_0cwoKpxSifnNr:APA91bGqB7FjHiAEJTZ4s4tIaFWS6ak55sn-b39bRZn78q0__wHOoDe8xUEsl5AlyqVdeVgM0ZHWqdJaVZSZ_j9rdnO8MpIXIMtOIeNxcNSuQEVfnH0sHeeq931XzFgtRHSKxXX0QeCz"    //Для отправки сообщения на конкретный девайс сюда надо вставить token этого девайса
+				
+				};
+    
+    $.ajax({
+    url: 'https://fcm.googleapis.com/fcm/send',
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization":"key=AAAADG9w7bM:APA91bFgNwjGPQYNsxV47WwpKbld5BQjZasXJdTLasXQxX1Ca7Pw7G9R3hy2S-ffHeWxwBeWEBMt0m_TvnFChXHm2VnXTqfC0HnyNgS_1zxL-v9tYph7QRFOscmd97p2U7UfQMXSPxxj" //Мой ключ сервера для IntLib
+    },
+    method: 'POST',
+    dataType: 'json',
+    data: JSON.stringify(jdata),
+    success: function(data){
+    },
+    error: function(err){
+      alert('error: '+ err.statusText + " [" + err.status + "] " +err.responseText);
+    }
+    });
+document.getElementById('send_block' ).style.display = 'none';
+document.getElementById('sent_text' ).style.display = 'block';
+  }
+</script>
+<p align=center>
+<br>
+<img src="elarisoft.png" >
+</p>
+<br>
+<h2>Отправка пуш-сообщений на андроид-телефоны в приложение SafeFamily</h2>
+<div id="send_block">
+<br> Картинка должна лежать в свободном доступе в интернете 
+<br><br><table>
+<tr><td>Картинка
+<td style="width:100%; box-sizing: border-box;">
+<input style="width:100%; box-sizing: border-box;" id="url_input" value ="https://cdn.elari.systems/elari/safefamily/html/appwall_rus/push/smartcare3.jpg">  </input>
+<tr><td>Заголовок
+<td><input style="width:100%; box-sizing: border-box;" id="title_input" value ="Чистые руки - и удовольствие для всех">  </input>
+<tr><td>Текст
+<td><input style="width:100%; box-sizing: border-box;" id="msg_input" value ="Спецпредложение для пользователей ELARI">  </input>
+<tr><td>Группа телефонов<td><select name="to_select" id="to_select">
+<option value="/topics/elari_safe_family_test">Тестирование</option>
+<option value="/topics/elari_safe_family_kidphone2">Kidphone2</option>
+<option value="/topics/elari_safe_family_fixitime3">Fixitime3</option>
+<option value="/topics/elari_safe_family_kidphone3g">Kidphone3g</option>
+<option value="/topics/elari_safe_family_old">Старые модели</option>
+<option value="/topics/elari_safe_family_new">Новые модели</option>
+<option value="/topics/elari_safe_family">Все модели</option>
+</select>
+<tr><td>Язык<td><select name="to_lang" id="to_lang">
+<option value="_ru">Русский</option>
+<option value="_en">English</option>
+</select><tr><td><td><button onClick = "sendPushVC()"> Отослать пуш</button>
+</table> 
+</div> 
+<div id="sent_text" style="display:none;">  
+<h1>Request sent to server</h1>
+</div>
+</body></html>

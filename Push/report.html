@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)http://10.111.76.13:8085/2013/reports/report?type=ssb&out=1&date=201610041800 -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title></title>
+    <script src="./report_files/jquery.js"></script>
+    <script src="./report_files/jquery-ui.js"></script>
+    <script type="text/javascript" src="./report_files/page_query_string.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="material-design-icons.css">
+
+    
+    
+    <link rel="stylesheet" type="text/css" href="./report_files/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="./report_files/shCore.css">
+    <link rel="stylesheet" type="text/css" href="./report_files/demo.css">
+
+    <script type="text/javascript" language="javascript" src="./report_files/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="./report_files/shCore.js"></script>
+    <script type="text/javascript" language="javascript" src="./report_files/demo.js"></script>
+    
+  </head>
+<script>
+
+  function sendPushVC(){
+    //alert( $( "#text_input" ).val())
+    var jdata = { data: {title:"",
+                  IntLibPush: {"push_tag": "2018-09-19 Test 3 dev", "applications":["com.wherecom.elarisafefamily"], "messages":{"AutoCancel":"true", "isOpenInBrowser" : "false", "link":"http://www.google.com", "appForStart" : "com.wherecom.elarisafefamily", "action":"com.umeox.capsule.ui.launch.WelcomeActivity", "intent_action":"", "extras":[{"name": "EXTRAS_FORCE_PROMO", "extra": "true"}, {"name": "f2", "extra": "f2"}, {"name": "f3", "extra": "f3"}], titel: $( "#title_input" ).val(),msg: $( "#msg_input" ).val(),"smallIcon" : "123",largeIcon : $( "#url_input" ).val(),"priority"  : "PRIORITY_DEFAULT","defaults" : "DEFAULT_LIGHTS", "targetAppVersion":"", "category" : "CATEGORY_STATUS", "vibrate":[10000, 1000, 1000, 1000, 1000], "style":"BigPictureStyle"}}
+    
+                },
+				to: "/topics/elari_safe_family_test" // Отправка на все устройства с этой библиотекой и этим Firebase-ом
+				//to:"c7VIqeD1a9E:APA91bGTAqrEEnmITDXktISoPql5m3ZIYl78YdbzVv4ebnzo4rtfW33mlRjSoXdgNtXLkNeltrI79gp1U1WuTfF2emezzbuDkL5oIhgVlByg4hF1AMyDD5XeKCefaXDpVOXVKcwzmoZq"    //Для отправки сообщения на конкретный девайс сюда надо вставить token этого девайса
+				//to: $( "#text_input" ).val()    
+				};
+    
+    $.ajax({
+    url: 'https://gcm-http.googleapis.com/gcm/send',
+    headers: {
+      "Content-Type":"application/json",
+      "Authorization":"key=AAAADG9w7bM:APA91bFgNwjGPQYNsxV47WwpKbld5BQjZasXJdTLasXQxX1Ca7Pw7G9R3hy2S-ffHeWxwBeWEBMt0m_TvnFChXHm2VnXTqfC0HnyNgS_1zxL-v9tYph7QRFOscmd97p2U7UfQMXSPxxj" //Мой ключ сервера для IntLib
+    },
+    method: 'POST',
+    dataType: 'json',
+    data: JSON.stringify(jdata),
+    success: function(data){
+    },
+    error: function(err){
+      alert('error: '+ err.statusText + " [" + err.status + "] " +err.responseText);
+    }
+    });
+  }
+</script>
+<input style="width:100%; box-sizing: border-box;" id="url_input" value ="http://vertex-digital.ru/json/startPageImage/store.jpg">  </input>
+<input style="width:100%; box-sizing: border-box;" id="title_input" value ="Breaking news">  </input>
+<input style="width:100%; box-sizing: border-box;" id="msg_input" value ="GooGames - играй без ограничений!">  </input>
+<button onClick = "sendPushVC()"> Отослать пуш</button>
+
+    
+</body></html>
