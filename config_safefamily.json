@@ -1,0 +1,8 @@
+{
+  "splash_url" : "https://cdn.elari.systems/elari/safefamily/settings/splash_url.json",
+  "promo_url" : "https://elari.net/appwall/",
+  "promo_en_url" : "hhttps://cdn.elari.systems/elari/safefamily/html/appwall_rus/eng/",
+  "alice_url": "https://cdn.elari.systems/elari/safefamily/html/appwall_rus/alice/main/",
+  "no_alice_url" : "https://cdn.elari.systems/elari/safefamily/html/appwall_rus/alice/not/main/",
+  "alice_in_en" : "false"
+}
